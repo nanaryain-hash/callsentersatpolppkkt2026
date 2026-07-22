@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Center Satpol PP - Kab. Kepulauan Tanimbar</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'satpol-dark': '#064e3b',   /* Emerald 900 - Hijau Tua Utama */
+                        'satpol-main': '#047857',   /* Emerald 700 - Hijau Medium */
+                        'satpol-light': '#10b981',  /* Emerald 500 - Hijau Terang */
+                        'satpol-gold': '#fbbf24',   /* Amber 400 - Aksen Emas/Kuning */
+                        'satpol-gold-hover': '#f59e0b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for subtle patterns and animations -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Hero Pattern Background */
+        .bg-hero-pattern {
+            background-color: #064e3b;
+            background-image: radial-gradient(#047857 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #047857; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #064e3b; 
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-satpol-dark shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    
+                    <div class="w-9 h-9 md:w-9 md:h-9 bg-white rounded-full flex flex-col items-center justify-center border-2 border-satpol-gold shadow-sm shrink-0">
+                        <span class="text-[6px] md:text-[7px] font-bold text-satpol-dark tracking-tighter">TANIMBAR</span>
+                    </div>
+
+                    <!-- Placeholder Logo Satpol PP -->
+                    <!-- Ganti elemen div ini dengan tag <img> yang berisi URL logo asli Anda -->
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex flex-col items-center justify-center border-2 border-satpol-gold shadow-sm shrink-0">
+                        <span class="text-[6px] md:text-[7px] font-bold text-satpol-dark tracking-tighter">SATPOL PP</span>
+                    </div>
+
+                    <!-- Brand Text -->
+                    <div class="ml-2 hidden sm:block">
+                        <h1 class="text-white font-bold text-sm md:text-base leading-tight uppercase">Satpol PP</h1>
+                        <p class="text-satpol-gold text-xs md:text-sm font-semibold">Kab. Kepulauan Tanimbar</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="text-white hover:text-satpol-gold transition-colors font-medium text-sm">Beranda</a>
+                    <a href="#layanan" class="text-white hover:text-satpol-gold transition-colors font-medium text-sm">Layanan</a>
+                    <a href="#prosedur" class="text-white hover:text-satpol-gold transition-colors font-medium text-sm">Prosedur</a>
+                    <a href="#lapor" class="bg-satpol-gold hover:bg-satpol-gold-hover text-satpol-dark font-bold px-5 py-2 rounded-full transition-all transform hover:scale-105 shadow-md text-sm">
+                        Lapor Sekarang
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-satpol-gold focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-satpol-main border-t border-satpol-light">
+            <div class="px-4 pt-2 pb-4 space-y-1 shadow-inner">
+                <a href="#beranda" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-satpol-dark hover:text-satpol-gold">Beranda</a>
+                <a href="#layanan" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-satpol-dark hover:text-satpol-gold">Layanan</a>
+                <a href="#prosedur" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-satpol-dark hover:text-satpol-gold">Prosedur</a>
+                <a href="#lapor" class="block px-3 py-2 mt-4 rounded-md text-base font-bold bg-satpol-gold text-satpol-dark text-center shadow-md">Lapor Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="pt-28 pb-20 md:pt-40 md:pb-32 bg-hero-pattern relative overflow-hidden flex-grow">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-72 h-72 rounded-full bg-satpol-main opacity-50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-satpol-light opacity-20 blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-satpol-main border border-satpol-light text-satpol-gold text-xs sm:text-sm font-semibold tracking-wider mb-6">
+                <i class="fa-solid fa-headset mr-2"></i> LAYANAN CALL CENTER 24 JAM
+            </span>
+            
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+                Pusat Pengaduan <br class="hidden md:block"/> <span class="text-satpol-gold">Ketertiban Umum</span>
+            </h2>
+            
+            <p class="mt-4 text-base md:text-xl text-gray-200 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
+                Satuan Polisi Pamong Praja Kabupaten Kepulauan Tanimbar siap melayani, mengayomi, dan menindaklanjuti laporan masyarakat demi terciptanya ketenteraman dan ketertiban daerah.
+            </p>
+
+            <!-- Emergency Numbers Board -->
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-2xl max-w-2xl mx-auto shadow-2xl mb-10">
+                <p class="text-gray-300 text-sm uppercase tracking-widest font-semibold mb-2">Telepon Darurat </p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                    <a href="tel:08134139661" class="flex items-center group">
+                        </div>
+                        <div class="ml-4 text-left">
+                        </div>
+                    </a>
+                    
+                    <div class="hidden md:block w-px h-12 bg-white/30"></div>
+
+                    <a href="https://wa.me/08134139661" target="_blank" class="flex items-center group">
+                        <div class="w-14 h-14 rounded-full bg-[#25D366] flex justify-center items-center group-hover:scale-110 transition-transform shadow-lg">
+                            <i class="fa-brands fa-whatsapp text-white text-3xl"></i>
+                        </div>
+                        <div class="ml-4 text-left">
+                            <p class="text-xl md:text-2xl font-bold text-white tracking-wide">0813-4713-9661</p>
+                            <p class="text-xs text-gray-300">WhatsApp Respons Cepat</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4">
+                <a href="#lapor" class="bg-satpol-gold hover:bg-satpol-gold-hover text-satpol-dark font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg transform hover:-translate-y-1">
+                    Buat Laporan Online <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan Section -->
+    <section id="layanan" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h3 class="text-satpol-main font-bold tracking-wide uppercase text-sm mb-2">Bidang Penanganan</h3>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Jenis Layanan Pengaduan</h2>
+                <div class="w-24 h-1 bg-satpol-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:border-satpol-main transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-xl bg-satpol-dark/10 flex items-center justify-center mb-6 group-hover:bg-satpol-dark transition-colors">
+                        <i class="fa-solid fa-people-group text-3xl text-satpol-dark group-hover:text-satpol-gold transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Ketertiban Umum</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Laporan terkait gangguan ketenteraman warga, kebisingan, orang gila yang meresahkan, atau kerumunan ilegal.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:border-satpol-main transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-xl bg-satpol-dark/10 flex items-center justify-center mb-6 group-hover:bg-satpol-dark transition-colors">
+                        <i class="fa-solid fa-gavel text-3xl text-satpol-dark group-hover:text-satpol-gold transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Pelanggaran Perda</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Pelanggaran bangunan tanpa izin, pedagang kaki lima (PKL) di area terlarang, dan pelanggaran peraturan daerah lainnya.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:border-satpol-main transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-xl bg-satpol-dark/10 flex items-center justify-center mb-6 group-hover:bg-satpol-dark transition-colors">
+                        <i class="fa-solid fa-landmark text-3xl text-satpol-dark group-hover:text-satpol-gold transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Aset Daerah</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Pengamanan dan pencegahan perusakan atau penyalahgunaan fasilitas umum dan aset milik Pemerintah Daerah.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:border-satpol-main transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-xl bg-satpol-dark/10 flex items-center justify-center mb-6 group-hover:bg-satpol-dark transition-colors">
+                        <i class="fa-solid fa-fire-extinguisher text-3xl text-satpol-dark group-hover:text-satpol-gold transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Kedaruratan Lainnya</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Bantuan pengamanan awal untuk bencana, kebakaran, atau kondisi darurat lain sebelum instansi terkait tiba.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prosedur Section -->
+    <section id="prosedur" class="py-20 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Prosedur Penanganan Laporan</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Kami menjamin kerahasiaan identitas pelapor dan memastikan setiap laporan ditindaklanjuti sesuai Standar Operasional Prosedur (SOP).</p>
+            </div>
+
+            <div class="relative">
+                <!-- Connecting Line for Desktop -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-satpol-light/30 -translate-y-1/2 z-0"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-10 relative z-10">
+                    
+                    <!-- Step 1 -->
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-satpol-dark text-white rounded-full flex items-center justify-center text-3xl font-bold shadow-lg border-4 border-white relative">
+                            1
+                            <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-satpol-gold rounded-full flex items-center justify-center border-2 border-white text-sm text-satpol-dark">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                            </div>
+                        </div>
+                        <h4 class="mt-6 text-lg font-bold text-gray-900">Warga Melapor</h4>
+                        <p class="mt-2 text-sm text-gray-600">Melalui telepon, WhatsApp, atau mengisi formulir online di website ini.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-satpol-dark text-white rounded-full flex items-center justify-center text-3xl font-bold shadow-lg border-4 border-white relative">
+                            2
+                            <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-satpol-gold rounded-full flex items-center justify-center border-2 border-white text-sm text-satpol-dark">
+                                <i class="fa-solid fa-clipboard-check"></i>
+                            </div>
+                        </div>
+                        <h4 class="mt-6 text-lg font-bold text-gray-900">Verifikasi Tim</h4>
+                        <p class="mt-2 text-sm text-gray-600">Admin Call Center memverifikasi kebenaran dan lokasi laporan.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-satpol-dark text-white rounded-full flex items-center justify-center text-3xl font-bold shadow-lg border-4 border-white relative">
+                            3
+                            <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-satpol-gold rounded-full flex items-center justify-center border-2 border-white text-sm text-satpol-dark">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                        </div>
+                        <h4 class="mt-6 text-lg font-bold text-gray-900">Tindak Lanjut</h4>
+                        <p class="mt-2 text-sm text-gray-600">Pengerahan personel/regu patroli ke lokasi kejadian dengan segera.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-satpol-dark text-white rounded-full flex items-center justify-center text-3xl font-bold shadow-lg border-4 border-white relative">
+                            4
+                            <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-satpol-gold rounded-full flex items-center justify-center border-2 border-white text-sm text-satpol-dark">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+                        </div>
+                        <h4 class="mt-6 text-lg font-bold text-gray-900">Penyelesaian</h4>
+                        <p class="mt-2 text-sm text-gray-600">Penanganan masalah di lapangan dan pelaporan kembali ke warga.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulir Laporan Section -->
+    <section id="lapor" class="py-20 bg-satpol-dark relative">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass rounded-3xl p-8 md:p-12 shadow-2xl">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Formulir Pengaduan Online</h2>
+                    <p class="text-gray-600">Sampaikan laporan Anda dengan detail. Sertakan foto bukti jika memungkinkan.</p>
+                </div>
+
+                <!-- Success Message (Hidden by default) -->
+                <div id="success-message" class="hidden mb-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Laporan Terkirim!</strong>
+                    <span class="block sm:inline">Terima kasih, laporan Anda telah kami terima dan akan segera diverifikasi oleh petugas.</span>
+                </div>
+
+                <form id="pengaduan-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Nama -->
+                        <div>
+                            <label for="nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap *</label>
+                            <input type="text" id="nama" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-satpol-main focus:border-satpol-main outline-none transition-all bg-white/50 focus:bg-white" placeholder="Masukkan nama Anda">
+                        </div>
+                        
+                        <!-- No HP -->
+                        <div>
+                            <label for="nohp" class="block text-sm font-semibold text-gray-700 mb-2">Nomor HP/WhatsApp *</label>
+                            <input type="tel" id="nohp" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-satpol-main focus:border-satpol-main outline-none transition-all bg-white/50 focus:bg-white" placeholder="0812xxxx">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Kategori -->
+                        <div>
+                            <label for="kategori" class="block text-sm font-semibold text-gray-700 mb-2">Kategori Laporan *</label>
+                            <select id="kategori" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-satpol-main focus:border-satpol-main outline-none transition-all bg-white/50 focus:bg-white appearance-none">
+                                <option value="" disabled selected>Pilih Kategori...</option>
+                                <option value="trantib">Gangguan Ketertiban Umum</option>
+                                <option value="perda">Pelanggaran Peraturan Daerah</option>
+                                <option value="aset">Pengamanan Aset</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Lokasi -->
+                        <div>
+                            <label for="lokasi" class="block text-sm font-semibold text-gray-700 mb-2">Lokasi Kejadian *</label>
+                            <input type="text" id="lokasi" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-satpol-main focus:border-satpol-main outline-none transition-all bg-white/50 focus:bg-white" placeholder="Desa/Kecamatan, Patokan tempat">
+                        </div>
+                    </div>
+
+                    <!-- Deskripsi -->
+                    <div>
+                        <label for="deskripsi" class="block text-sm font-semibold text-gray-700 mb-2">Deskripsi Laporan *</label>
+                        <textarea id="deskripsi" rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-satpol-main focus:border-satpol-main outline-none transition-all bg-white/50 focus:bg-white resize-none" placeholder="Ceritakan secara singkat kejadian yang ingin dilaporkan..."></textarea>
+                    </div>
+
+                    <!-- Foto (Mockup) -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Unggah Foto Bukti (Opsional)</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg bg-white/50 hover:bg-white transition-colors cursor-pointer">
+                            <div class="space-y-1 text-center">
+                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-400"></i>
+                                <div class="flex text-sm text-gray-600 justify-center">
+                                    <span class="relative cursor-pointer bg-transparent rounded-md font-medium text-satpol-main hover:text-satpol-dark focus-within:outline-none">
+                                        <span>Pilih file</span>
+                                        <input id="file-upload" name="file-upload" type="file" class="sr-only" accept="image/*">
+                                    </span>
+                                    <p class="pl-1">atau tarik dan lepas di sini</p>
+                                </div>
+                                <p class="text-xs text-gray-500">PNG, JPG, GIF hingga 5MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button type="submit" class="w-full flex justify-center py-4 px-4 border border-transparent rounded-lg shadow-md text-lg font-bold text-satpol-dark bg-satpol-gold hover:bg-satpol-gold-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-satpol-gold transition-all duration-300">
+                            <i class="fa-solid fa-paper-plane mr-2 mt-1"></i> Kirim Laporan
+                        </button>
+                    </div>
+                    <p class="text-xs text-center text-gray-500 mt-4"><i class="fa-solid fa-lock mr-1"></i> Data Anda dienkripsi dan dijamin kerahasiaannya oleh admin sistem.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t-4 border-satpol-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                
+                <!-- Brand Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-full flex flex-col items-center justify-center">
+                            <i class="fa-solid fa-shield-halved text-satpol-dark text-lg -mt-1"></i>
+                            <span class="text-[6px] font-bold text-satpol-dark">SATPOL</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold uppercase tracking-wider">Satpol PP</h3>
+                            <p class="text-satpol-gold text-sm">Kab. Kepulauan Tanimbar</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Garda terdepan dalam penegakan Peraturan Daerah, penyelenggaraan ketertiban umum dan ketenteraman masyarakat di wilayah Kabupaten Kepulauan Tanimbar.
+                    </p>
+                </div>
+
+                <!-- Kontak -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 uppercase tracking-wider border-b border-gray-700 pb-2">Hubungi Kami</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 mr-3 text-satpol-gold"></i>
+                            <span>Jl. Ir. Soekarno, Saumlaki, Kec. Tanimbar Selatan, Kabupaten Kepulauan Tanimbar, Maluku.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone mt-1 mr-3 text-satpol-gold"></i>
+                            <span>112 (Panggilan Darurat)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-brands fa-whatsapp mt-1 mr-3 text-satpol-gold text-lg"></i>
+                            <span>0812-3456-7890 (WA Call Center)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-envelope mt-1 mr-3 text-satpol-gold"></i>
+                            <span>pengaduan@satpolpp.tanimbarkab.go.id</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Jam Layanan -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 uppercase tracking-wider border-b border-gray-700 pb-2">Jam Layanan</h4>
+                    <div class="bg-gray-800 rounded-lg p-4 text-sm text-gray-300">
+                        <div class="flex justify-between py-2 border-b border-gray-700">
+                            <span>Senin - Jumat (Kantor)</span>
+                            <span class="font-bold text-white">08:00 - 16:00 WIT</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-700">
+                            <span>Sabtu - Minggu</span>
+                            <span class="font-bold text-white">Tutup (Piket)</span>
+                        </div>
+                        <div class="flex justify-between py-2 mt-2 bg-satpol-dark/50 p-2 rounded">
+                            <span class="text-satpol-gold font-bold"><i class="fa-solid fa-headset mr-1"></i> Call Center / Patroli</span>
+                            <span class="font-bold text-satpol-gold">24 JAM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 Satuan Polisi Pamong Praja Kab. Kepulauan Tanimbar. Hak Cipta Dilindungi.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-facebook text-xl"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-youtube text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-satpol-main text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl opacity-0 invisible transition-all duration-300 hover:bg-satpol-dark z-50 transform hover:-translate-y-1">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                // Change icon
+                const icon = btn.querySelector('i');
+                if(menu.classList.contains('hidden')){
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Close mobile menu on link click
+            const mobileLinks = menu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    btn.querySelector('i').classList.remove('fa-xmark');
+                    btn.querySelector('i').classList.add('fa-bars');
+                });
+            });
+
+            // 2. Form Submission Simulation
+            const form = document.getElementById('pengaduan-form');
+            const successMsg = document.getElementById('success-message');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Prevent actual submission
+                
+                // Change button state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Mengirim...';
+                submitBtn.disabled = true;
+
+                // Simulate network request
+                setTimeout(() => {
+                    form.reset(); // Clear form
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Show success message
+                    successMsg.classList.remove('hidden');
+                    successMsg.classList.add('block');
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMsg.classList.add('hidden');
+                        successMsg.classList.remove('block');
+                    }, 5000);
+                }, 1500);
+            });
+
+            // 3. Back to Top Button Logic
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                    backToTopBtn.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                    backToTopBtn.classList.remove('opacity-100', 'visible');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
